@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Specified "rewrites" will not automatically work with "output: export"
+  // output: 'export',
   reactStrictMode: true,
 
   // Preserve 'h-ref-ing' :=
-  skipTrailingSlashRedirect: true,
+  //skipTrailingSlashRedirect: true,
 
-  // Employ 'dist' over 'out', alas to not confuse with other output dir's :=
+  // Employ 'dist' over 'out', alas to not confuse with other outputDirs' :=
   distDir: 'dist',
 
   images: {
@@ -16,8 +17,8 @@ const nextConfig = {
   async rewrites()
   {
     return [{
-      source: '/api/:path*',
-      destination: '${process.env.NEXT_PUBLIC_URL}/:path*'
+      source: `/api/:path*`,
+      destination: `/${process.env.NEXT_PUBLIC_URL}/:path*`
     }]
   }
 }
