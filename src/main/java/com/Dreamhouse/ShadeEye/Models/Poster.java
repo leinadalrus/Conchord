@@ -2,12 +2,13 @@ package com.Dreamhouse.ShadeEye.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Poster
 {
-  private @Id @GeneratedValue Long id;
+  private @Id @GeneratedValue(strategy= GenerationType.AUTO) Long id;
   private String title;
   private String description;
   private String author;

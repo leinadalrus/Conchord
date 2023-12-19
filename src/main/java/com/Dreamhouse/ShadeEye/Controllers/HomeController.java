@@ -1,14 +1,14 @@
 package com.Dreamhouse.ShadeEye.Controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
+@Controller
 public class HomeController
 {
-  @GetMapping("/")
-  public String Index(String _index)
+  @RequestMapping(value = "/")
+  public String Index()
   {
-    return _index;
+    return "index";
   }
 }
