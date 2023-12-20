@@ -12,7 +12,7 @@ public class LancerGenerator
     shipAPI.getWingLeader();
     shipAPI.getShipTarget();
 
-    for (ShipAPI variant : concord.Lances(shipAPI.getWingLeader(), pilot))
+    for (ShipAPI lance : concord.Lances(shipAPI.getWingLeader(), pilot))
     {
       combatEngineAPI.getShips();
       combatEngineAPI.getPlayerShip();

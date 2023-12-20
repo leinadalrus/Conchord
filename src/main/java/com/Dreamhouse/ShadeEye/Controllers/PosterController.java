@@ -1,10 +1,11 @@
 package com.Dreamhouse.ShadeEye.Controllers;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import com.Dreamhouse.ShadeEye.Models.Flair;
+import com.Dreamhouse.ShadeEye.Models.Poster;
+import com.Dreamhouse.ShadeEye.Shared.PosterRepository;
+import org.springframework.http.*;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,23 +17,49 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/user");
 public class PosterController
 {
   @GetMapping("/poster/{id}")
-  public String Poster(@RequestParam("id") String id)
+  public String Poster(@PathVariable("id") String id)
   {
     return id;
   }
 
-  @PutMapping("/poster/{id})
+  // Database manipulation:
+  PosterRepository posterRepository;
+
+  public PosterController(PosterRepository repository)
+  {
+    this.posterRepository = repository;
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @GetMapping("/poster/{id}")
+  public HttpEntity<Poster> requestImageURI(
+    @RequestParam(name = "mediaImageURI", required = true, defaultValue = "poster") String mediaImageURI,
+    Model model
+  )
+  {
+    model.addAttribute("mediaImageURI", mediaImageURI);
+    Poster _poster = new Poster("Nib", "Crash", "Pulmonary", "2023-10-11");
+
+    return new ResponseEntity<>(_poster, HttpStatus.OK);
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @PutMapping("/poster")
   public ResponseEntity<String> createPoster(@PathVariable String id)
   {
-    String messageSlices = id;
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
 
-    return new ResponseEntity<>(messageSlices, headers, HttpStatus.OK);
+    return new ResponseEntity<>(id, headers, HttpStatus.OK);
+  }
+
+  @DeleteMapping("/poster/{id}")
+  public ResponseEntity<String> destroyPoster(@PathVariable Long id)
+  {
+    posterRepository.deleteById(id);
+    return ResponseEntity.noContent().build();
   }
 }
