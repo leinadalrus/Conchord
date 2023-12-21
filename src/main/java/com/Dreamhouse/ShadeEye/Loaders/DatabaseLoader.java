@@ -2,9 +2,9 @@ package com.Dreamhouse.ShadeEye.Loaders;
 
 import com.Dreamhouse.ShadeEye.Models.Poster;
 import com.Dreamhouse.ShadeEye.Models.RadarChart;
-import com.Dreamhouse.ShadeEye.Shared.PosterRepository;
-import com.Dreamhouse.ShadeEye.Shared.RadarChartRepository;
-import com.Dreamhouse.ShadeEye.Shared.UserRepository;
+import com.Dreamhouse.ShadeEye.Stores.PosterRepository;
+import com.Dreamhouse.ShadeEye.Stores.RadarChartRepository;
+import com.Dreamhouse.ShadeEye.Stores.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.userdetails.User;

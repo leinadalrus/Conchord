@@ -1,4 +1,4 @@
-package com.Dreamhouse.ShadeEye.Shared;
+package com.Dreamhouse.ShadeEye.Stores;
 
 import com.Dreamhouse.ShadeEye.Models.Poster;
 import org.springframework.data.repository.CrudRepository;

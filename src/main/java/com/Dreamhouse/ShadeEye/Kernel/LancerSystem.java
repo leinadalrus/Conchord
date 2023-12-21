@@ -1,19 +1,24 @@
 package com.Dreamhouse.ShadeEye.Kernel;
 
-import com.fs.starfarer.combat.entities.Ship;
+import com.fs.starfarer.api.combat.ShipAPI;
 
-public abstract class LancerSystem
+public abstract class LancerSystem implements ShipAPI
 {
-  Ship ship;
-
-  public LancerSystem()
+  public LancerSystem(ShipAPI ship)
   {
-  }
-
-  public LancerSystem(Ship _ship)
-  {
-    this.ship = _ship;
   }
 
   public abstract void Execute();
+
+  @Override
+  public String getId()
+  {
+    return null;
+  }
+
+  @Override
+  public String getName()
+  {
+    return null;
+  }
 }

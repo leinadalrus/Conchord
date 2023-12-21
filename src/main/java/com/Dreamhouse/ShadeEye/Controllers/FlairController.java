@@ -1,7 +1,7 @@
 package com.Dreamhouse.ShadeEye.Controllers;
 
-import com.Dreamhouse.ShadeEye.Data.Avatar;
-import com.Dreamhouse.ShadeEye.Data.Emblem;
+import com.Dreamhouse.ShadeEye.Annals.Avatar;
+import com.Dreamhouse.ShadeEye.Annals.Emblem;
 
 import com.Dreamhouse.ShadeEye.Models.Flair;
 import com.fs.starfarer.combat.R;
@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,11 +27,11 @@ public class FlairController
   @CrossOrigin(origins = "http://localhost:3000")
   @GetMapping("/{flair}")
   public HttpEntity<Flair> flair(
-    @RequestParam(name = "imageMediaURI", required = true, defaultValue = "flair") String flair,
+    @RequestParam(name = "mediaImageURI", required = true, defaultValue = "flair") String flair,
     Model model
   )
   {
-    model.addAttribute("imageMediaURI", flair);
+    model.addAttribute("mediaImageURI", flair);
     Flair _flair = new Flair(flair);
 
     return new ResponseEntity<>(_flair, HttpStatus.OK);

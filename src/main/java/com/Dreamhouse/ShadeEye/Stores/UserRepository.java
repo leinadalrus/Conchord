@@ -1,4 +1,4 @@
-package com.Dreamhouse.ShadeEye.Shared;
+package com.Dreamhouse.ShadeEye.Stores;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.userdetails.User;

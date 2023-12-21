@@ -1,10 +1,8 @@
 package com.Dreamhouse.ShadeEye.Models;
 
-import com.Dreamhouse.ShadeEye.Data.LabelName;
-import com.Dreamhouse.ShadeEye.Data.VectorPosition;
+import com.Dreamhouse.ShadeEye.Annals.LabelName;
+import com.Dreamhouse.ShadeEye.Annals.VectorPosition;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 
 @Entity
 public class RadarChart

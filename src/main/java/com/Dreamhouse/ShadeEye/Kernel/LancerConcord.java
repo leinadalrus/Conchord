@@ -1,19 +1,26 @@
 package com.Dreamhouse.ShadeEye.Kernel;
 
-import com.Dreamhouse.ShadeEye.Data.PilotData;
+import com.Dreamhouse.ShadeEye.Annals.PilotData;
 import com.fs.starfarer.api.combat.ShipAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class LancerConcord extends LancerSystem
+public abstract class LancerConcord extends LancerSystem
 {
   String faction;
   String company;
   Long uuid;
 
-  PilotData createPilot(PilotData pilotData, String faction, String company, Long uuid)
+  public LancerConcord(ShipAPI ship)
+  {
+    super(ship);
+  }
+
+  PilotData createPilot(
+    PilotData pilotData, String faction, String company, Long uuid
+  )
   {
     this.faction = faction;
     this.company = company;
@@ -28,11 +35,24 @@ public class LancerConcord extends LancerSystem
 
     List<PilotData> pilots = new ArrayList<>();
 
-    Map<ShipAPI, PilotData> lance = new java.util.HashMap<>(Map.ofEntries(Map.entry(wing, pilot)));
+    Map<ShipAPI, PilotData> lance = new java.util.HashMap<>(Map.ofEntries(Map.entry(
+      wing,
+      pilot
+    )));
 
     for (var entry : lance.entrySet())
     {
-      pilots.add(this.createPilot(new PilotData(), "Horus", "Iron Lotus", 11033L));
+      pilots.add(this.createPilot(
+        new PilotData("Interpellates",
+                      "Elite",
+                      "Perambulator",
+                      "Dissimilar",
+                      0L
+        ),
+        "Horus",
+        "Iron Lotus",
+        11033L
+      ));
       lance.put(wings.getFirst(), pilots.getFirst());
     }
 
@@ -43,5 +63,6 @@ public class LancerConcord extends LancerSystem
   public void Execute()
   {
   }
+
 }
 

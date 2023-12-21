@@ -1,8 +1,8 @@
 package com.Dreamhouse.ShadeEye.Controllers;
 
-import com.Dreamhouse.ShadeEye.Models.Flair;
 import com.Dreamhouse.ShadeEye.Models.Poster;
-import com.Dreamhouse.ShadeEye.Shared.PosterRepository;
+import com.Dreamhouse.ShadeEye.Exceptions.PosterNotFoundException;
+import com.Dreamhouse.ShadeEye.Stores.PosterRepository;
 import org.springframework.http.*;
 
 import org.springframework.ui.Model;
@@ -12,21 +12,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class PosterController
 {
+  private PosterRepository posterRepository;
+
   @GetMapping("/poster/{id}")
   public String Poster(@PathVariable("id") String id)
   {
     return id;
   }
-
   // Database manipulation:
-  PosterRepository posterRepository;
 
   public PosterController(PosterRepository repository)
   {
@@ -47,6 +49,34 @@ public class PosterController
   }
 
   @CrossOrigin(origins = "http://localhost:3000")
+  @PostMapping("/poster/{ids}")
+  public ResponseEntity<Poster> updatePostersCollection(@PathVariable int ids)
+  {
+    Poster posterComparator = new Poster("Nib",
+                                         "Crash",
+                                         "Pulmonary",
+                                         "2023-10-11"
+    );
+    List<Poster> posters = new ArrayList<>();
+    posters.add(posterComparator);
+    Poster poster = null;
+
+    for (Poster p : posters)
+    {
+      try
+      {
+        if (p.getId() >= 0L) poster = p;
+      }
+      catch (PosterNotFoundException exception)
+      {
+        exception.getCause();
+      } // finally...?
+    }
+
+    return new ResponseEntity<>(poster, HttpStatus.OK);
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
   @PutMapping("/poster")
   public ResponseEntity<String> createPoster(@PathVariable String id)
   {
@@ -59,7 +89,7 @@ public class PosterController
   @DeleteMapping("/poster/{id}")
   public ResponseEntity<String> destroyPoster(@PathVariable Long id)
   {
-    posterRepository.deleteById(id);
+    this.posterRepository.deleteById(id);
     return ResponseEntity.noContent().build();
   }
 }

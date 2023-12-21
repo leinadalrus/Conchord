@@ -29,6 +29,37 @@ public class Poster
     this.dateCreated = _dateCreated;
   }
 
+  public Long getId()
+  {
+    return this.id;
+  }
+
+
+  public String getTitle()
+  {
+    return this.title;
+  }
+
+  public void setTitle(String title)
+  {
+    this.title = title;
+  }
+
+  public String getDescription()
+  {
+    return this.description;
+  }
+
+  public void setDescription(String description)
+  {
+    this.description = description;
+  }
+
+  public String getDateCreated()
+  {
+    return this.dateCreated;
+  }
+
   public String mediaImageURI(
     @JsonProperty("mediaImageURI") String _mediaImageURI
   )

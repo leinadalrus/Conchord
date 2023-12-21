@@ -1,11 +1,11 @@
 package com.Dreamhouse.ShadeEye.Models;
 
 import com.Dreamhouse.ShadeEye.Kernel.LancerSystem;
-import com.fs.starfarer.combat.entities.Ship;
+import com.fs.starfarer.api.combat.ShipAPI;
 
 public class BalancedFrame extends LancerSystem
 {
-  BalancedFrame(Ship _ship)
+  public BalancedFrame(ShipAPI _ship)
   {
     super(_ship);
   }

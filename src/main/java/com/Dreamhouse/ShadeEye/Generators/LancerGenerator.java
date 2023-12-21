@@ -1,6 +1,6 @@
 package com.Dreamhouse.ShadeEye.Generators;
 
-import com.Dreamhouse.ShadeEye.Data.PilotData;
+import com.Dreamhouse.ShadeEye.Annals.PilotData;
 import com.Dreamhouse.ShadeEye.Kernel.LancerConcord;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
