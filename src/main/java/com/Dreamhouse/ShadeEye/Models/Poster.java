@@ -1,6 +1,5 @@
 package com.Dreamhouse.ShadeEye.Models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
