@@ -4,28 +4,37 @@ import com.Dreamhouse.ShadeEye.Annals.PilotData;
 import com.fs.starfarer.api.combat.ShipAPI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class LancerConcord extends LancerSystem
+public class LancerConcord
 {
-  String faction;
+  public final LancerSystem lancerSystem;
+
+  public String faction;
   String company;
   Long uuid;
 
-  public LancerConcord(ShipAPI ship)
+  public LancerConcord(LancerSystem _lancerSystem)
   {
-    super(ship);
+    this.lancerSystem = _lancerSystem;
   }
 
-  PilotData createPilot(
-    PilotData pilotData, String faction, String company, Long uuid
+  public LancerConcord(
+    PilotData pilotData, LancerSystem lancerSystem, String faction, String company, Long uuid
   )
   {
+    this.lancerSystem = lancerSystem;
     this.faction = faction;
     this.company = company;
     this.uuid = uuid;
+  }
 
+  PilotData setPilotData(
+    PilotData pilotData
+  )
+  {
     return pilotData;
   }
 
@@ -35,34 +44,22 @@ public abstract class LancerConcord extends LancerSystem
 
     List<PilotData> pilots = new ArrayList<>();
 
-    Map<ShipAPI, PilotData> lance = new java.util.HashMap<>(Map.ofEntries(Map.entry(
-      wing,
-      pilot
+    Map<ShipAPI, PilotData> lance = new HashMap<>(Map.ofEntries(Map.entry(wing,
+                                                                          pilot
     )));
 
     for (var entry : lance.entrySet())
     {
-      pilots.add(this.createPilot(
-        new PilotData("Interpellates",
-                      "Elite",
-                      "Perambulator",
-                      "Dissimilar",
-                      0L
-        ),
-        "Horus",
-        "Iron Lotus",
-        11033L
-      ));
+      pilots.add(this.setPilotData(new PilotData("Interpellates",
+                                                "Elite",
+                                                "Perambulator",
+                                                "Dissimilar",
+                                                0L
+      )));
       lance.put(wings.getFirst(), pilots.getFirst());
     }
 
     return wings;
   }
-
-  @Override
-  public void Execute()
-  {
-  }
-
 }
 
