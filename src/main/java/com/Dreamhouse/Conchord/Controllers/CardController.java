@@ -4,16 +4,13 @@ package com.Dreamhouse.Conchord.Controllers;//
 
 import com.Dreamhouse.Conchord.Models.Card;
 import com.Dreamhouse.Conchord.Stores.CardRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CardController
 {
-  private final CardRepository cardRepository;
+  private CardRepository cardRepository;
 
   public CardController(CardRepository repository)
   {

@@ -19,24 +19,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class PosterController
 {
-  private PosterRepository posterRepository;
-
-  @GetMapping("/poster/{id}")
-  public String Poster(@PathVariable("id") String id)
-  {
-    return id;
-  }
-  // Database manipulation:
+  private final PosterRepository posterRepository;
 
   public PosterController(PosterRepository repository)
   {
     this.posterRepository = repository;
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
-  @GetMapping("/poster/{id}")
+  @GetMapping("/{id}")
   public HttpEntity<Poster> requestImageURI(
     @RequestParam(name = "mediaImageURI", required = true, defaultValue = "poster") String mediaImageURI,
     Model model
@@ -48,8 +41,7 @@ public class PosterController
     return new ResponseEntity<>(_poster, HttpStatus.OK);
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
-  @PostMapping("/poster/{ids}")
+  @PostMapping("/{ids}")
   public ResponseEntity<Poster> updatePostersCollection(@PathVariable int ids)
   {
     Poster posterComparator = new Poster("Nib",
@@ -76,8 +68,7 @@ public class PosterController
     return new ResponseEntity<>(poster, HttpStatus.OK);
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
-  @PutMapping("/poster")
+  @PutMapping("/{id}")
   public ResponseEntity<String> createPoster(@PathVariable String id)
   {
     HttpHeaders headers = new HttpHeaders();
@@ -86,7 +77,7 @@ public class PosterController
     return new ResponseEntity<>(id, headers, HttpStatus.OK);
   }
 
-  @DeleteMapping("/poster/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<String> destroyPoster(@PathVariable Long id)
   {
     this.posterRepository.deleteById(id);

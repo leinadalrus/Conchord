@@ -1,18 +1,22 @@
 package com.Dreamhouse.Conchord.Models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import org.springframework.data.geo.Box;
 import org.springframework.data.geo.Point;
 
-public class Card extends Poster
+@Entity
+public class Card
 {
-  private Long id;
+  private @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
   private Box dimensions;
   private Point position;
-  private Poster poster;
 
   public Card(Box _dimensions, Point _position)
   {
-    super("BalancedFrame", "A pilot's go-to frame.", "John Doe", "2023-12-01");
     this.dimensions = _dimensions;
     this.position = _position;
   }

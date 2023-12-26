@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Poster
 {
   private @Id
-  @GeneratedValue(strategy = GenerationType.AUTO) Long id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
   private String title;
   private String description;
   private String author;
