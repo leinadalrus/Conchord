@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile({"concord", "topics"})
+@Profile({"conchord", "topics"})
 @Configuration
 public class CuttingFloorRoom
 {
@@ -22,9 +22,7 @@ public class CuttingFloorRoom
 
     @Bean
     Binding bindTopic(
-        TopicExchange topicExchange,
-        Queue autoDeleteQueue,
-        String routingKey
+        TopicExchange topicExchange, Queue autoDeleteQueue, String routingKey
     )
     {
       return BindingBuilder.bind(autoDeleteQueue)
@@ -42,6 +40,7 @@ public class CuttingFloorRoom
                            .with(routingKey);
     }
 
+    @Profile("receiver")
     @Bean
     public HubChannelReceiver receiver()
     {
@@ -49,29 +48,22 @@ public class CuttingFloorRoom
     }
   }
 
+  @Profile("sender")
+  @Bean
+  public HubChannelSender sender()
+  {
+    return new HubChannelSender();
+  }
+
   @Bean
   public TopicExchange topicExchange()
   {
-    return new TopicExchange("concord.topic");
+    return new TopicExchange("conchord.topic");
   }
 
   @Bean
   public Queue ping()
   {
     return new Queue("ping");
-  }
-
-  @Profile("receiver")
-  @Bean
-  public HubChannelReceiver receiver()
-  {
-    return new HubChannelReceiver();
-  }
-
-  @Profile("sender")
-  @Bean
-  public HubChannelSender sender()
-  {
-    return new HubChannelSender();
   }
 }

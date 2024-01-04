@@ -15,16 +15,23 @@ public class CommandlineUsage
     return args -> {
       System.out.println("java -jar target/Conchord.jar \\" +
                          "--spring.profiles.active=topics,receiver \\" +
-                         "--concord.client.duration=60000");
+                         "--conchord.client.duration=60000");
+
       System.out.println("java -jar target/Conchord.jar \\" +
-                         "--spring.profiles.active=topics,sender \\" +
-                         "--concord.client.duration=60000");
+                         "--spring.profiles.active=topics,sender \\");
+
+      System.out.println("java -jar target/Conchord.jar \\" +
+                         "--spring.profiles.active=rpc,server \\" +
+                         "--conchord.client.duration=60000");
+
+      System.out.println("java -jar target/Conchord.jar \\" +
+                         "--spring.profiles.active=rpc,client \\");
     };
   }
 
   @Profile("!usage_message")
   @Bean
-  public CommandLineRunner concord()
+  public CommandLineRunner conchord()
   {
     return new NervesConcordRunner();
   }

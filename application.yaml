@@ -6,6 +6,8 @@ logging:
   level:
     org: ERROR
 
-concord:
+conchord:
   client:
+    duration: 10000
+  server:
     duration: 10000

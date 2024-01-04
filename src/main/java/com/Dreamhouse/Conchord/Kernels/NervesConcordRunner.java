@@ -7,7 +7,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 public class NervesConcordRunner implements CommandLineRunner
 {
-  @Value("${concord.client.duration:0}")
+  @Value("${conchord.client.duration:0}")
   private int duration;
 
   @Autowired
