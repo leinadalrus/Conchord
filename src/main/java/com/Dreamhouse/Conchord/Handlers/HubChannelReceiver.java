@@ -7,14 +7,23 @@ import org.springframework.util.StopWatch;
 @RabbitListener(queues = "ping")
 public class HubChannelReceiver
 {
-  @RabbitListener(queues = "#{autoDeleteQueues.name}")
-  public void ReceiveQueueName(String input) throws InterruptedException
+  private void work(String input) throws InterruptedException
   {
-    this.Receive(input, 1);
+    for (var ch : input.toCharArray())
+    {
+      if (ch == '.') Thread.sleep(1000);
+    }
+  }
+
+  @RabbitListener(queues = "#{autoDeleteQueues.name}")
+  public void ReceiveQueueName(String input, int receiverNum)
+  throws InterruptedException
+  {
+    this.Receive(input, receiverNum);
   }
 
   @RabbitHandler
-  public void Receive(String input, int receiverN)
+  public void Receive(String input, int receiverN) throws InterruptedException
   {
     StopWatch stopWatch = new StopWatch();
     stopWatch.start();
@@ -22,6 +31,7 @@ public class HubChannelReceiver
                        input +
                        "\nReceiverN :=\t" +
                        receiverN);
+    this.work(input);
     stopWatch.stop();
   }
 }

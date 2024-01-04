@@ -21,21 +21,25 @@ public class CuttingFloorRoom
     }
 
     @Bean
-    Binding bindTopic(TopicExchange topicExchange, Queue autoDeleteQueue)
+    Binding bindTopic(
+        TopicExchange topicExchange,
+        Queue autoDeleteQueue,
+        String routingKey
+    )
     {
       return BindingBuilder.bind(autoDeleteQueue)
                            .to(topicExchange)
-                           .with("*.nerves.*");
+                           .with(routingKey);
     }
 
     @Bean
     Binding bindTopics(
-        TopicExchange topicsExchange, Queue autoDeleteQueue
+        TopicExchange topicsExchange, Queue autoDeleteQueue, String routingKey
     )
     {
       return BindingBuilder.bind(autoDeleteQueue)
                            .to(topicsExchange)
-                           .with("nerves.#");
+                           .with(routingKey);
     }
 
     @Bean

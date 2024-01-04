@@ -13,10 +13,12 @@ public class CommandlineUsage
   public CommandLineRunner usage()
   {
     return args -> {
-      System.out.println(
-          "This app uses Spring Profiles to control its behavior.\n");
-      System.out.println(
-          "Sample usage: java -jar rabbit - tutorials.jar --spring.profiles.active = hello - world, sender");
+      System.out.println("java -jar target/Conchord.jar \\" +
+                         "--spring.profiles.active=topics,receiver \\" +
+                         "--concord.client.duration=60000");
+      System.out.println("java -jar target/Conchord.jar \\" +
+                         "--spring.profiles.active=topics,sender \\" +
+                         "--concord.client.duration=60000");
     };
   }
 
