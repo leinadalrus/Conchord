@@ -6,9 +6,8 @@ import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.core.parameters.P;
 
-@Profile({"cutting-floor", "hello-world"})
+@Profile({"concord", "topics"})
 @Configuration
 public class CuttingFloorRoom
 {
@@ -22,12 +21,21 @@ public class CuttingFloorRoom
     }
 
     @Bean
-    Binding bindDirectExchange(
-      DirectExchange directExchange, Queue autoDeleteQueue
+    Binding bindTopic(TopicExchange topicExchange, Queue autoDeleteQueue)
+    {
+      return BindingBuilder.bind(autoDeleteQueue)
+                           .to(topicExchange)
+                           .with("*.nerves.*");
+    }
+
+    @Bean
+    Binding bindTopics(
+        TopicExchange topicsExchange, Queue autoDeleteQueue
     )
     {
-      return BindingBuilder.bind(autoDeleteQueue).to(directExchange).with(
-        "branch");
+      return BindingBuilder.bind(autoDeleteQueue)
+                           .to(topicsExchange)
+                           .with("nerves.#");
     }
 
     @Bean
@@ -38,9 +46,15 @@ public class CuttingFloorRoom
   }
 
   @Bean
+  public TopicExchange topicExchange()
+  {
+    return new TopicExchange("concord.topic");
+  }
+
+  @Bean
   public Queue ping()
   {
-    return new Queue("Ping");
+    return new Queue("ping");
   }
 
   @Profile("receiver")
@@ -55,11 +69,5 @@ public class CuttingFloorRoom
   public HubChannelSender sender()
   {
     return new HubChannelSender();
-  }
-
-  @Bean
-  public DirectExchange directExchange()
-  {
-    return new DirectExchange("concord.direct");
   }
 }

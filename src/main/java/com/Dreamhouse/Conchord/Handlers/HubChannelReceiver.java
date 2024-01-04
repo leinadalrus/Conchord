@@ -18,7 +18,10 @@ public class HubChannelReceiver
   {
     StopWatch stopWatch = new StopWatch();
     stopWatch.start();
-    System.out.println("[x] Received :=\t" + input + "\nReceiverN :=\t" + receiverN);
+    System.out.println("[x] Received :=\t" +
+                       input +
+                       "\nReceiverN :=\t" +
+                       receiverN);
     stopWatch.stop();
   }
 }
