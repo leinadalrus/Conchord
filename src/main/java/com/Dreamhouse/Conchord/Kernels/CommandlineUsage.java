@@ -14,13 +14,6 @@ public class CommandlineUsage
   {
     return args -> {
       System.out.println("java -jar target/Conchord.jar \\" +
-                         "--spring.profiles.active=topics,receiver \\" +
-                         "--conchord.client.duration=60000");
-
-      System.out.println("java -jar target/Conchord.jar \\" +
-                         "--spring.profiles.active=topics,sender \\");
-
-      System.out.println("java -jar target/Conchord.jar \\" +
                          "--spring.profiles.active=rpc,server \\" +
                          "--conchord.client.duration=60000");
 
