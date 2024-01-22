@@ -15,7 +15,7 @@ public class PgQueryProcessor
     this.propertyConnection.setProperties(properties);
   }
 
-  String query(int id, String[] arguments) throws SQLException
+  String index(int id, String[] arguments) throws SQLException
   {
     Statement statement = this.propertyConnection.getConnection()
                                                  .createStatement();
@@ -25,7 +25,7 @@ public class PgQueryProcessor
       ResultSet resultSet = statement.executeQuery(code);
       System.out.println(resultSet.getString(arguments[id]));
 
-      if (Objects.equals(code, "\0") || code == null)
+      if (code.isEmpty() || code.isBlank() || Objects.equals(code, "\0"))
         resultSet.close();
 
       return resultSet.getString(code);
