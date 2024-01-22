@@ -1,6 +1,7 @@
 package DreamHouse.Conchord.Shared;
 
 import java.sql.*;
+import java.util.Objects;
 import java.util.Properties;
 
 public class PgQueryProcessor
@@ -23,8 +24,14 @@ public class PgQueryProcessor
     {
       ResultSet resultSet = statement.executeQuery(code);
       System.out.println(resultSet.getString(arguments[id]));
+
+      if (Objects.equals(code, "\0") || code == null)
+        resultSet.close();
+
       return resultSet.getString(code);
     }
+
+    statement.close();
 
     return "";
   }
