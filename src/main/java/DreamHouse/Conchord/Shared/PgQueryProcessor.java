@@ -7,6 +7,7 @@ import java.util.Properties;
 public class PgQueryProcessor
 {
   PgPropertyConnection propertyConnection = new PgPropertyConnection();
+  String explain = "EXPLAIN\\\t".toUpperCase();
 
   PgQueryProcessor(Connection connection, Properties properties)
   throws SQLException
@@ -15,24 +16,44 @@ public class PgQueryProcessor
     this.propertyConnection.setProperties(properties);
   }
 
-  String index(int id, String[] arguments) throws SQLException
+  void executeExplained(int cursor, String[] queries) throws SQLException
   {
-    Statement statement = this.propertyConnection.getConnection()
-                                                 .createStatement();
+    this.propertyConnection.getConnection().setAutoCommit(false);
 
-    for (var code : arguments)
+    for (var q : queries)
     {
-      ResultSet resultSet = statement.executeQuery(code);
-      System.out.println(resultSet.getString(arguments[id]));
+      Statement statement = this.propertyConnection.getConnection()
+                                                   .createStatement();
+      statement.setFetchSize(cursor);
+      ResultSet resultSet = statement.executeQuery(explain + q);
 
-      if (code.isEmpty() || code.isBlank() || Objects.equals(code, "\0"))
+      if (q.isEmpty() || q.isBlank() || Objects.equals(q, "\0"))
+      {
         resultSet.close();
+        statement.close();
+      }
 
-      return resultSet.getString(code);
+      resultSet.close();
+      statement.close();
     }
+  }
 
-    statement.close();
+  void upsertExplained(int cursor, int id, String[] queries) throws SQLException
+  {
+    this.propertyConnection.getConnection().setAutoCommit(false);
 
-    return "";
+    for (var q : queries)
+    {
+      Statement statement = this.propertyConnection.getConnection()
+                                                   .prepareStatement(explain +
+                                                                     q);
+      statement.setFetchSize(cursor);
+      statement.executeUpdate(q, id);
+
+      if (q.isEmpty() || q.isBlank() || Objects.equals(q, "\0"))
+        statement.close();
+
+      statement.close();
+    }
   }
 }
