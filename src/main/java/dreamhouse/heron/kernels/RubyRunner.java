@@ -1,4 +1,4 @@
-package DreamHouse.Heron.Kernels;
+package dreamhouse.heron.kernels;
 
 public class RubyRunner
 {

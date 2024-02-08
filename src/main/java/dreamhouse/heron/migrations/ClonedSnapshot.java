@@ -1,4 +1,4 @@
-package DreamHouse.Heron.Migrations;
+package dreamhouse.heron.migrations;
 
 public class ClonedSnapshot
 {

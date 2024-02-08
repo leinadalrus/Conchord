@@ -1,4 +1,4 @@
-package DreamHouse.Heron.Databases;
+package dreamhouse.heron.databases;
 
 import java.sql.*;
 import java.util.Properties;

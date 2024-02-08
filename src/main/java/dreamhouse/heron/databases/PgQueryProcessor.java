@@ -1,12 +1,15 @@
-package DreamHouse.Heron.Databases;
+package dreamhouse.heron.databases;
 
 import java.sql.*;
 import java.util.Properties;
 
+import dreamhouse.heron.databases.PgPropertyConnection;
+
 public class PgQueryProcessor
 {
-  PgPropertyConnection propertyConnection = new PgPropertyConnection();
-  String explain = "EXPLAIN\\\t".toUpperCase();
+  PgPropertyConnection propertyConnection =
+    new PgPropertyConnection();
+  String explain = "EXPLAIN".toUpperCase() + ' ';
 
   PgQueryProcessor(Connection connection, Properties properties)
   throws SQLException
@@ -49,8 +52,7 @@ public class PgQueryProcessor
       statement.setFetchSize(cursor);
       statement.executeUpdate(q, id);
 
-      if (q.isEmpty() || q.isBlank())
-        statement.close();
+      if (q.isEmpty() || q.isBlank()) statement.close();
 
       statement.close();
     }
