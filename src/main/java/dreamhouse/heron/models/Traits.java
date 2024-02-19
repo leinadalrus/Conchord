@@ -1,5 +1,8 @@
 package dreamhouse.heron.models;
 
-public class Traits {
-  Traits() {}
+public class Traits
+{
+  public Traits()
+  {
+  }
 }

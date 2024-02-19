@@ -27,7 +27,7 @@ public class TraitsController
   }
 
   @PostMapping("/character/create")
-  public String submitCharactSheetCalled(
+  public String submitCharacterSheetAs(
     @ModelAttribute
     Character character, Model model
   )

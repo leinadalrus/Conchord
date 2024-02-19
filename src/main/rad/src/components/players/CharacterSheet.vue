@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { TvRemote } from '../../server/api/TvRemote'
+import type { RestConsumer } from '../../server/api/RestConsumer.ts'
 // `import type` creates a file-module equivalent to Vue's `<script setup>`
 
-class PlayerTrait implements TvRemote {
+class PlayerTrait implements RestConsumer {
   #uuid = ref(0)
   #uri = ref('')
   #url = ref('')

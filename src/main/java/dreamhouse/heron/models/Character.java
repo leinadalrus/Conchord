@@ -2,12 +2,13 @@ package dreamhouse.heron.models;
 
 public class Character {
   private Long id;
-  private String name;
+  private String nickname;
   private Traits traits;
 
   public Character(String newName, Traits traitInstance)
   {
-    this.name = newName;
+    this.nickname = newName;
+    this.traits = traitInstance;
   }
 
   public Character() {
@@ -20,7 +21,7 @@ public class Character {
 
   public String getName()
   {
-    return this.name;
+    return this.nickname;
   }
   
   public Traits getTraits()

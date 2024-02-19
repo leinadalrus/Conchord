@@ -2,7 +2,7 @@
 // created by David on: 2024-2-14
 //
 
-export interface TvRemote {
+export interface RestConsumer {
   index(): string | number
   show(): number | boolean
   init(): void | boolean
