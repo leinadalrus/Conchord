@@ -2,7 +2,15 @@
   "name": "nerv",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/bundle.umd.cjs",
+  "module": "./dist/bundle.js",
+  "exports": {
+    ".": {
+      "import": "./dist/bundle.js",
+      "require": "./dist/bundle.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
