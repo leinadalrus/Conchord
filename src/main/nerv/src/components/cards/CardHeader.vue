@@ -1,13 +1,14 @@
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue"
 import { defineStore } from "pinia"
-import ShipsBoats from "../ships/ShipsBoats.vue";
+import ShowCharacter from "../players/ShowCharacter.vue"
 </script>
 
 <template>
   <section>
-    <ShipsBoats />
-    <LogList />
+    <article>
+      <ShowCharacter />
+    </article>
   </section>
 </template>
 

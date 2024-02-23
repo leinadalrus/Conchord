@@ -9,9 +9,17 @@ const useShipsBoatsStore = defineStore("ship", () => {
   const ShipStaff = ref(0) // denote by UUID
 
   const ShipTypePrefix = ref("")
+  const ShipDivision = ref("")
   const ShipName = ref("")
 
-  return { ShipRegistryID, ShipCaptain, ShipStaff, ShipTypePrefix, ShipName }
+  return {
+    ShipRegistryID,
+    ShipCaptain,
+    ShipStaff,
+    ShipTypePrefix,
+    ShipDivision,
+    ShipName
+  }
 })
 </script>
 

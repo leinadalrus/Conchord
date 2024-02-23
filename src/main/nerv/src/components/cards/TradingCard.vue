@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import CardBody from "./CardBody.vue";
 import { beginDrag } from "./CardHandler.vue"
+import type CardHeaderVue from "./CardHeader.vue";
 </script>
 
 <template>
   <article :draggable="true" :class="styles.CardContainer" @dragstart="beginDrag">
+    <CardHeaderVue />
     <CardBody />
   </article>
 </template>
