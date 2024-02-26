@@ -1,13 +1,13 @@
 package dreamhouse.conchord.controllers;
 
-import dreamhouse.conchord.stores.TraitsRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import dreamhouse.conchord.models.Character;
+import dreamhouse.conchord.models.Traits;
+import dreamhouse.conchord.stores.TraitsRepository;
 
 @Controller
 public class TraitsController
@@ -19,20 +19,20 @@ public class TraitsController
     this.repository = repository;
   }
 
-  @GetMapping("/character/create")
-  public String newCharacterSheetWith(Model model)
+  @GetMapping("/trait")
+  public String getTraitWith(Model model)
   {
-    model.addAttribute("create", new Character());
-    return "create";
+    model.addAttribute("get", new Traits());
+    return "trait";
   }
 
-  @PostMapping("/character/create")
-  public String submitCharacterSheetAs(
+  @PostMapping("/trait/add")
+  public String addTraitWith(
     @ModelAttribute
-    Character character, Model model
+    Traits trait, Model model
   )
   {
-    model.addAttribute("create", character);
-    return "result";
+    model.addAttribute("create", trait);
+    return "trait";
   }
 }

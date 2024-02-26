@@ -14,4 +14,21 @@ public class CharacterController
   {
     this.character = character;
   }
+
+  @GetMapping("/character")
+  public String getCharacterSheetWith(Model model)
+  {
+    model.addAttribute("get", new Character());
+    return "character";
+  }
+
+  @PostMapping("/character/create")
+  public String createCharacterSheetAs(
+    @ModelAttribute
+    Character character, Model model
+  )
+  {
+    model.addAttribute("create", character);
+    return "character";
+  }
 }

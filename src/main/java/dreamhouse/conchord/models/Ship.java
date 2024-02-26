@@ -20,4 +20,6 @@ public class Ship
   String accommodation;
   String lifeSavingEquipment;
   String shipsBoat;
+  
+  public Ship() {}
 }
