@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 import { defineStore } from "pinia"
 import { ref } from "vue"
 </script>

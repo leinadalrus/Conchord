@@ -22,4 +22,6 @@ public class Commander extends Character
     this.lastName = lastName;
     this.firstName = firstName;
   }
+  
+  public Commander() {}
 }

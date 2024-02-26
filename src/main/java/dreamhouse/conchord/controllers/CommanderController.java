@@ -27,7 +27,7 @@ public class CommanderController
   @PostMapping("/character/create")
   public String createCommanderWith(
     @ModelAttribute
-    Commander, Model model
+    Commander commander, Model model
   )
   {
     model.addAttribute("post", commander);

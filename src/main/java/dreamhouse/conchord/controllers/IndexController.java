@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class IndexController
 {
   @GetMapping(value = "/")
-  public String index(@RequestParam(value = "name") String filename)
+  public String index()
   {
-    return filename;
+    String index = "index";
+    return index;
   }
 }
