@@ -8,6 +8,6 @@ public class ConchordApplication
 {
 	public static void main(String[] args)
 	{
-		SpringApplication.run(HeronApplication.class, args);
+		SpringApplication.run(ConchordApplication.class, args);
 	}
 }
