@@ -1,8 +1,7 @@
 package dreamhouse.conchord.controllers;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 import dreamhouse.conchord.models.Commander;
 import dreamhouse.conchord.stores.CommanderRepository;

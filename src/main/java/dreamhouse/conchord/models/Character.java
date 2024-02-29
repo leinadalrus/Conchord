@@ -1,6 +1,7 @@
 package dreamhouse.conchord.models;
 
-public class Character {
+public class Character
+{
   private Long id;
   private String nickname;
   private Traits traits;
@@ -11,9 +12,10 @@ public class Character {
     this.traits = traitInstance;
   }
 
-  public Character() {
+  public Character()
+  {
   }
-  
+
   public Long getId()
   {
     return this.id;
@@ -23,7 +25,7 @@ public class Character {
   {
     return this.nickname;
   }
-  
+
   public Traits getTraits()
   {
     return this.traits;
