@@ -2,9 +2,9 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "lib": ["esnext"],
-    "module": "esnext",
+    "module": "nodenext",
     "preserveConstEnums": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "strict": true,
     "sourceMap": true,
     "target": "es2017",

@@ -16,7 +16,7 @@ public class CharacterController
     this.character = character;
   }
 
-  @GetMapping("/character")
+  @GetMapping(name = "/character")
   public String getCharacterSheetWith(Model model)
   {
     model.addAttribute("get", new Character());
