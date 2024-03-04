@@ -4,8 +4,8 @@ import { ref } from "vue"
 const setAuthority = ref("")
 let authored = ""
 
-async function signUp(email: string, password: string): void {}
-async function signInWithPassword(email: string, password: string): void {}
+async function signUp(email: string, password: string): Promise<void> {}
+async function signInWithPassword(email: string, password: string): Promise<void> {}
 
 async function handleLogin(
   type: string,
