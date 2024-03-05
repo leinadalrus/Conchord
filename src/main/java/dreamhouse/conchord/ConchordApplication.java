@@ -11,14 +11,6 @@ import java.util.UUID;
 @SpringBootApplication
 public class ConchordApplication
 {
-	@RequestMapping(name = "/conchord-app")
-	public Map<String, Object> index()
-	{
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("content", "index.html");
-		return model;
-	}
-
 	public static void main(String[] args)
 	{
 		SpringApplication.run(ConchordApplication.class, args);

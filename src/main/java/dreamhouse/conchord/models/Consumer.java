@@ -11,9 +11,7 @@ public class Consumer
   private @Id Long id;
   private String username;
 
-  Consumer() {}
-
-  Consumer(String username)
+  public Consumer(String username)
   {
     this.username = username;
   }
