@@ -1,78 +1,100 @@
-<script setup lang="ts">
-import { ref } from "vue"
+<script lang="ts">
+import { defineComponent, ref } from "vue"
 
 const setAuthority = ref("")
 let authored = ""
 
-async function signUp(email: string, password: string): Promise<void> {}
-async function signInWithPassword(email: string, password: string): Promise<void> {}
-
-async function handleLogin(
-  type: string,
+type Consumer = {
   username: string,
-  password: string
-): Promise<void> {
-  try {
-    type === "LOGIN"
-      ? await signInWithPassword(username, password)
-      : await signUp(username, password)
-    if (type !== "LOGIN") {
-      console.log("Error with login with password authentication")
-    } else if (username !== document.getElementById("email")?.innerHTML) {
-      console.log("Signup successful, confirmation mail should be sent soon!")
-      setAuthority.value = "LOGIN"
-    }
-  } catch (error) {
-    console.log("error", error)
-    authored = setAuthority.value
-  }
+}[];
 
-  setAuthority.value = authored
+interface Data {
+  loading: boolean,
+  post: null | Consumer
 }
+
+export default defineComponent({
+  data(): Data {
+    return {
+      loading: false,
+      post: null
+    };
+  },
+  created() {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchData();
+  },
+  watch: {
+    // call again the method if the route changes
+    '$route': 'fetchData'
+  },
+  methods: {
+    fetchData(): void {
+      this.post = null;
+      this.loading = true;
+
+      fetch('username')
+        .then(r => r.json())
+        .then(json => {
+          this.post = json as Consumer;
+          this.loading = false;
+          return;
+        });
+    },
+
+    handleLogin(
+      type: string,
+      username: string,
+    ): void {
+      try {
+        type === "LOGIN"
+          ? this.fetchData()
+          : false
+        if (type !== "LOGIN") {
+          console.log("Error with login with password authentication")
+        } else if (username !== document.getElementById("email")?.innerHTML) {
+          console.log("Signup successful, confirmation mail should be sent soon!")
+          setAuthority.value = "LOGIN"
+        }
+      } catch (error) {
+        console.log("error", error)
+        authored = setAuthority.value
+      }
+
+      setAuthority.value = authored
+    }
+  },
+});
 </script>
 
 <template>
-  <article className="{styles.LoginConsole}">
-    <section className="{styles.LoginConsoleSegment}">
-      <form className="{styles.LoginConsoleForm}">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value="{username}"
-          on-change="{event}"
-        />
+  <article :class="styles.LoginConsole">
+    <section :class="styles.LoginConsoleSegment">
+      <form :class="styles.LoginConsoleForm">
+        <input type="email" name="email" placeholder="Email" value="{username}" on-change="{event}" />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value="{password}"
-          onchange="{event}"
-        />
+        <input type="password" name="password" placeholder="Password" value="{password}" onchange="{event}" />
 
-        <div className="{styles.loginConsoleReset}">
+        <div :class="styles.LoginConsoleReset">
           <button>
             <i>Forgot password</i>
           </button>
         </div>
 
-        <div className="{styles.loginConsoleReset}">
+        <div :class="styles.LoginConsoleReset">
           <button type="reset">
             <i>Remember me</i>
           </button>
         </div>
       </form>
 
-      <div className="{styles.loginConsoleSubmit}">
-        <a
-          :on-click="
-            (event: Event) => {
-              event.preventDefault()
-              handleLogin('LOGIN', 'daniel.david.surla@gmail.com', 'TestAdmin1')
-            }
-          "
-        >
+      <div :class="styles.loginConsoleSubmit">
+        <a :on-click="(event: Event) => {
+            event.preventDefault()
+            handleLogin('LOGIN', 'daniel.david.surla@gmail.com')
+          }
+          ">
           Sign In
         </a>
       </div>
@@ -90,14 +112,12 @@ async function handleLogin(
   padding: 1.712rem 2.256rem;
   margin: auto;
 
-  clip-path: polygon(
-    0 0%,
-    100% 0,
-    100% calc(100% - 0rem),
-    calc(100% - 0rem) 100%,
-    0 100%,
-    0% calc(100% - 0rem)
-  );
+  clip-path: polygon(0 0%,
+      100% 0,
+      100% calc(100% - 0rem),
+      calc(100% - 0rem) 100%,
+      0 100%,
+      0% calc(100% - 0rem));
 
   opacity: 99%;
   border-radius: 2.512333rem;
@@ -191,14 +211,12 @@ async function handleLogin(
 }
 
 .LoginConsoleSegment {
-  clip-path: polygon(
-    2rem 0%,
-    100% 0,
-    100% calc(100% - 2rem),
-    calc(100% - 2rem) 100%,
-    0 100%,
-    0% 2rem
-  );
+  clip-path: polygon(2rem 0%,
+      100% 0,
+      100% calc(100% - 2rem),
+      calc(100% - 2rem) 100%,
+      0 100%,
+      0% 2rem);
 
   width: 15.704rem;
   position: relative;
@@ -227,8 +245,8 @@ async function handleLogin(
   opacity: 86%;
 }
 
-.loginConsoleSearchbox,
-.loginConsoleSelection {
+.LoginConsoleSearchbox,
+.LoginConsoleSelection {
   transform: translate(-10rem, 0);
 
   padding: 1rem;
@@ -237,7 +255,7 @@ async function handleLogin(
   display: inline-flex;
 }
 
-.loginConsoleSearchbox ::placeholder {
+.LoginConsoleSearchbox ::placeholder {
   width: 8rem;
   height: 3rem;
 
@@ -253,7 +271,7 @@ async function handleLogin(
   padding: 1rem;
 }
 
-.loginConsoleSelection select {
+.LoginConsoleSelection select {
   width: 8rem;
   height: 3rem;
 
@@ -271,28 +289,28 @@ async function handleLogin(
   cursor: pointer;
 }
 
-.loginConsoleSearchbox:active,
-.loginConsoleSelection select:active {
+.LoginConsoleSearchbox:active,
+.LoginConsoleSelection select:active {
   border-color: linear-gradient(23deg, #f16d82 0%, #f27683 48%, #f79d85 100%);
 }
 
-.loginConsoleReset,
-.loginConsoleSubmit {
+.LoginConsoleReset,
+.LoginConsoleSubmit {
   padding: 1rem;
   position: relative;
   display: inline-flexbox;
 }
 
-.loginConsoleReset,
-.loginConsoleSubmit {
+.LoginConsoleReset,
+.LoginConsoleSubmit {
   transform: translate(15rem, 0);
 
   transition: all 0.3s ease-in-out;
   font-family: Inter, sans-serif;
 }
 
-.loginConsoleReset button,
-.loginConsoleSubmit button {
+.LoginConsoleReset button,
+.LoginConsoleSubmit button {
   width: 8rem;
   height: 3rem;
 
@@ -308,8 +326,8 @@ async function handleLogin(
   padding: 1rem;
 }
 
-.loginConsoleReset button,
-.loginConsoleSubmit button {
+.LoginConsoleReset button,
+.LoginConsoleSubmit button {
   outline: none;
   cursor: pointer;
   border: none;
@@ -319,31 +337,31 @@ async function handleLogin(
   text-align: right;
 }
 
-.loginConsoleReset {
+.LoginConsoleReset {
   transform: translate(1rem, 5.5rem);
 }
 
-.loginConsoleReset:hover button {
+.LoginConsoleReset:hover button {
   transform: translateY(3px);
   box-shadow: none;
 }
 
-.loginConsoleSubmit {
+.LoginConsoleSubmit {
   margin: 0.17rem;
   padding: 1rem;
   text-align: justify;
 }
 
-.loginConsoleSubmit button {
+.LoginConsoleSubmit button {
   transform: translate(-10rem, -10rem);
 }
 
-.loginEmailField,
-.loginPasswordField {
+.LoginEmailField,
+.LoginPasswordField {
   transform: translate(-5.5rem, 1rem);
 }
 
-.loginEmailField {
+.LoginEmailField {
   padding: 1rem;
   height: 1rem;
   margin: 0.1rem;
@@ -356,7 +374,7 @@ async function handleLogin(
   outline: none;
 }
 
-.loginPasswordField {
+.LoginPasswordField {
   padding: 1rem;
   height: 1rem;
   margin: 0.1rem;
@@ -369,32 +387,6 @@ async function handleLogin(
   outline: none;
 
   text-align: right;
-}
-
-.partIndex {
-  max-width: 9vw;
-  max-height: fit-content;
-
-  padding: 1rem;
-  margin: auto;
-
-  border-radius: 0.704rem;
-  background-color: 0.4065b0;
-  border: 0.063rem solid #ecf1f2;
-}
-
-.DisclosedViewport {
-  position: relative;
-  display: inline-flex;
-  padding: 1rem;
-  margin: auto;
-}
-
-.ImageViewer {
-  position: relative;
-  display: inline-flex;
-  padding: 1rem;
-  margin: auto;
 }
 
 @keyframes sunset {
