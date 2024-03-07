@@ -2,10 +2,11 @@ package dreamhouse.conchord.models;
 
 import java.util.ArrayList;
 
-public class Staff extends Character
+public class Staff
 {
   private final ArrayList<Character> characters;
   private final Ship ship;
+
   public Staff(ArrayList<Character> characters, Ship ship)
   {
     this.characters = characters;
